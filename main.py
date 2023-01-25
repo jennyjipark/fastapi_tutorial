@@ -27,15 +27,15 @@ session = engine.sessionmaker()
 
 
 ######## 시작 ########
-# @app.post("/")
-# async def first_get():
+@app.get("/")
+async def first_get():
 
-#     hi = "하이하이!!"
-#     return hi
+    hi = "하이하이!!"
+    return hi
 
 
 # img_meta_data
-@app.get("/send_meta_data")
+@app.post("/send_meta_data")
 # 매개변수를 객체 하나로 만드는게 좋을듯
 async def send_meta_data( path: str = Body(), latitude: str = Body(), longitude: str = Body(), manufacturer:  str = Body(), length: str = Body(), width: str = Body()):
     ms = MetaScraper()
