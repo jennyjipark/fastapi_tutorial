@@ -1,6 +1,6 @@
 from fastapi import FastAPI, status, Body
 from sqlalchemy.orm import Session
-
+from pydantic import BaseModel
 from sqlalchemy import MetaData, Table
 from sqlalchemy.orm import declarative_base
 
@@ -25,6 +25,13 @@ app = FastAPI()
 engine = engineconn()
 session = engine.sessionmaker()
 
+class Item(BaseModel):
+    path: str
+    latitude: str
+    longitude: str
+    manufacturer: str
+    length: str
+    width: str
 
 ######## 시작 ########
 @app.get("/")
@@ -37,33 +44,35 @@ async def first_get():
 # img_meta_data
 @app.post("/send_meta_data")
 # 매개변수를 객체 하나로 만드는게 좋을듯
-async def send_meta_data( path: str = Body(), latitude: str = Body(), longitude: str = Body(), manufacturer:  str = Body(), length: str = Body(), width: str = Body()):
+async def send_meta_data(item: Item):
     ms = MetaScraper()
     table = "img_meta_data"
 # path: str, latitude: str, longitude: str, manufacturer:  str, length: str, width: str
-    json_data = {
-        "path": path,
-        "latitude": latitude,
-        "longitude": longitude,
-        "manufacturer": manufacturer,
-        "length": length,
-        "width": width
-    }
+    # json_data = {
+    #     "path": path,
+    #     "latitude": latitude,
+    #     "longitude": longitude,
+    #     "manufacturer": manufacturer,
+    #     "length": length,
+    #     "width": width
+    # }
 
-    try:
-        json.dump(json_data)
-        # meta_test = ms.search()
-        # print(meta_test)
+    return item
 
-        # for h in haccp:
-        #     print(h)
-        #     session.bulk_insert_mappings(ImgMetaData, h)
+    # try:
+    #     json.dump(json_data)
+    #     # meta_test = ms.search()
+    #     # print(meta_test)
 
-        # session.commit()
+    #     # for h in haccp:
+    #     #     print(h)
+    #     #     session.bulk_insert_mappings(ImgMetaData, h)
+
+    #     # session.commit()
         
 
-    except Exception as e:
-        print("img_meta_data", e)
+    # except Exception as e:
+    #     print("img_meta_data", e)
     
 
-    return JSONResponse(json_data)
+    # return JSONResponse(json_data)
