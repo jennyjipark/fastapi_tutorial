@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Body
 from sqlalchemy.orm import Session
 
 from sqlalchemy import MetaData, Table
@@ -37,10 +37,10 @@ async def first_get():
 # img_meta_data
 @app.post("/send_meta_data")
 # 매개변수를 객체 하나로 만드는게 좋을듯
-async def send_meta_data(path: str, latitude: str, longitude: str, manufacturer:  str, length: str, width: str):
+async def send_meta_data( path: str = Body(), latitude: str = Body(), longitude: str = Body(), manufacturer:  str = Body(), length: str = Body(), width: str = Body()):
     ms = MetaScraper()
     table = "img_meta_data"
-
+# path: str, latitude: str, longitude: str, manufacturer:  str, length: str, width: str
     json_data = {
         "path": path,
         "latitude": latitude,
