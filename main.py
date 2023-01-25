@@ -27,11 +27,11 @@ session = engine.sessionmaker()
 
 
 ######## 시작 ########
-@app.post("/")
-async def first_get():
+# @app.post("/")
+# async def first_get():
 
-    hi = "하이하이!!"
-    return hi
+#     hi = "하이하이!!"
+#     return hi
 
 
 # img_meta_data
