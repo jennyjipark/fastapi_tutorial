@@ -9,7 +9,7 @@ class engineconn:
     "name": "postgresql",
     "user": get_secret("POSTGRES_ID"),
     "password": get_secret("POSTGRES_PW"),
-    "host": "34.64.154.219",
+    "host": "bgood.c25k4phikwpu.ap-northeast-2.rds.amazonaws.com",
     "dbconn": "postgres",
     "port": "5432"
 }

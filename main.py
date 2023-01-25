@@ -28,32 +28,32 @@ session = engine.sessionmaker()
 @app.get("/")
 async def first_get():
 
-    hi = "hello"
+    hi = "하이하이!!"
     return hi
 
 
 # img_meta_data
-@app.get("/img_meta_data")
+@app.post("/img_meta_data")
 def get_img_meta_data():
 
-    meta_scraper = MetaScraper()
+    ms = MetaScraper()
     table = "img_meta_data"
 
-    # try:
-    #     img = meta_scraper.search()
-        # print(haccp)
+    try:
+        meta_test = ms.search()
+        print(meta_test)
+
         # for h in haccp:
-            # print(h)
-            # session.bulk_insert_mappings(ConsumerHaccp, h)
+        #     print(h)
+        #     session.bulk_insert_mappings(ImgMetaData, h)
 
         # session.commit()
-        # fvc(f"테이블명: {table}", f"{time} 데이터 insert 완료")
+        
 
-    # except Exception as e:
-    #     print("img_meta_data", e)
-    #     fvc(f"테이블명: {table}", f"{time} 데이터 insert를 완료하지 못했습니다.")
-    # log_txt(table)
+    except Exception as e:
+        print("img_meta_data", e)
+       
 
-    text = "멋쟁이!!".encode("utf-8")
+    text = "멋쟁이!!"
 
     return text
