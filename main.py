@@ -27,7 +27,7 @@ session = engine.sessionmaker()
 
 
 ######## 시작 ########
-@app.get("/")
+@app.post("/")
 async def first_get():
 
     hi = "하이하이!!"
