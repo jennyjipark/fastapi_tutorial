@@ -35,15 +35,17 @@ async def first_get():
 
 # img_meta_data
 @app.post("/send_meta_data")
-async def send_meta_data(book: str):
+async def send_meta_data(path: str, latitude: str, longitude: str, manufacturer:  str, length: str, width: str):
     ms = MetaScraper()
     table = "img_meta_data"
 
     json_data = {
-        "name": "string",
-        "genre": "fiction",
-        "price": 0,
-        "book_id": "22222"
+        "path": path,
+        "latitude": latitude,
+        "longitude": longitude,
+        "manufacturer": manufacturer,
+        "length": length,
+        "width": width
     }
 
     try:
