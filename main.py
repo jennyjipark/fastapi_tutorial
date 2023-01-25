@@ -12,6 +12,7 @@ from dateutil.relativedelta import relativedelta
 from pydantic import BaseModel
 from odmantic import Model
 from db_conn import engineconn
+import json
 from model import (
     ImgMetaData
 )
@@ -33,15 +34,22 @@ async def first_get():
 
 
 # img_meta_data
-@app.post("/img_meta_data")
-def get_img_meta_data():
-
+@app.post("/send_meta_data")
+async def send_meta_data(book: str):
     ms = MetaScraper()
     table = "img_meta_data"
 
+    json_data = {
+        "name": "string",
+        "genre": "fiction",
+        "price": 0,
+        "book_id": "22222"
+    }
+
     try:
-        meta_test = ms.search()
-        print(meta_test)
+        json.dump(json_data)
+        # meta_test = ms.search()
+        # print(meta_test)
 
         # for h in haccp:
         #     print(h)
@@ -52,8 +60,6 @@ def get_img_meta_data():
 
     except Exception as e:
         print("img_meta_data", e)
-       
+    
 
-    text = "멋쟁이!!"
-
-    return text
+    return json_data
