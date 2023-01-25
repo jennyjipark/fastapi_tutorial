@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from odmantic import Model
 from db_conn import engineconn
 import json
+from starlette.responses import JSONResponse
 from model import (
     ImgMetaData
 )
@@ -34,7 +35,8 @@ async def first_get():
 
 
 # img_meta_data
-@app.get("/send_meta_data")
+@app.post("/send_meta_data")
+# 매개변수를 객체 하나로 만드는게 좋을듯
 async def send_meta_data(path: str, latitude: str, longitude: str, manufacturer:  str, length: str, width: str):
     ms = MetaScraper()
     table = "img_meta_data"
@@ -64,4 +66,4 @@ async def send_meta_data(path: str, latitude: str, longitude: str, manufacturer:
         print("img_meta_data", e)
     
 
-    return json_data
+    return JSONResponse(json_data)
