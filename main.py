@@ -54,4 +54,4 @@ def get_img_meta_data():
     #     fvc(f"테이블명: {table}", f"{time} 데이터 insert를 완료하지 못했습니다.")
     # log_txt(table)
 
-    return "뭔 개소리야"
+    return "재성님바버"
