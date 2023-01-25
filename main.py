@@ -54,6 +54,6 @@ def get_img_meta_data():
     #     fvc(f"테이블명: {table}", f"{time} 데이터 insert를 완료하지 못했습니다.")
     # log_txt(table)
 
-    text = "멋쟁이!!".encode("cpc-949")
+    text = "멋쟁이!!".encode("utf-8")
 
     return text
