@@ -34,7 +34,7 @@ async def first_get():
 
 
 # img_meta_data
-@app.post("/send_meta_data")
+@app.get("/send_meta_data")
 async def send_meta_data(path: str, latitude: str, longitude: str, manufacturer:  str, length: str, width: str):
     ms = MetaScraper()
     table = "img_meta_data"
