@@ -1,9 +1,9 @@
-from fastapi import FastAPI, status, Body
+
+from fastapi import FastAPI, status, Body, Depends
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from sqlalchemy import MetaData, Table
 from sqlalchemy.orm import declarative_base
-
 from numpy import average, record
 
 from datetime import datetime
@@ -13,9 +13,11 @@ from pydantic import BaseModel
 from odmantic import Model
 from db_conn import engineconn
 import json
+from typing import List
 from starlette.responses import JSONResponse
 from model import (
-    ImgMetaData
+    ImgMetaData,
+    BppleUser
 )
 
 from meta_scraper import MetaScraper
@@ -25,6 +27,9 @@ app = FastAPI()
 engine = engineconn()
 session = engine.sessionmaker()
 
+
+
+
 class Item(BaseModel):
     path: str
     latitude: str
@@ -32,6 +37,28 @@ class Item(BaseModel):
     manufacturer: str
     length: str
     width: str
+
+class User(BaseModel):
+    id: str
+    pw: str
+    farm_name: str
+
+user_info: List[User] = []
+
+# user_info: List[User] = [
+    # User(
+    #     id = "test01", 
+    #     pw = "0000",
+    #     farm_name = "테스트",
+    #  ),
+
+    #  User(
+    #     id = "test02", 
+    #     pw = "0000",
+    #     farm_name = "테스트",
+    #  )
+# ]
+
 
 ######## 시작 ########
 @app.get("/")
@@ -41,38 +68,30 @@ async def first_get():
     return hi
 
 
-# img_meta_data
+# 이미지 메타데이터 보내기
 @app.post("/send_meta_data")
-# 매개변수를 객체 하나로 만드는게 좋을듯
 async def send_meta_data(item: Item):
-    ms = MetaScraper()
-    table = "img_meta_data"
-# path: str, latitude: str, longitude: str, manufacturer:  str, length: str, width: str
-    # json_data = {
-    #     "path": path,
-    #     "latitude": latitude,
-    #     "longitude": longitude,
-    #     "manufacturer": manufacturer,
-    #     "length": length,
-    #     "width": width
-    # }
+    item_dict = item.dict()
+    return item_dict
 
-    return item
 
-    # try:
-    #     json.dump(json_data)
-    #     # meta_test = ms.search()
-    #     # print(meta_test)
+# 유저 정보 보내기
+@app.post("/send_user")
+async def send_meta_data(user: User):
+    user_info.append(user)
 
-    #     # for h in haccp:
-    #     #     print(h)
-    #     #     session.bulk_insert_mappings(ImgMetaData, h)
+    return user
 
-    #     # session.commit()
-        
+# 유저정보 DB넣기
+@app.get("/get_user")
+async def get_user():
+    for u in user_info:
+        session.bulk_insert_mappings(BppleUser, [u.dict()])
+        session.commit()
 
-    # except Exception as e:
-    #     print("img_meta_data", e)
-    
+    return user_info
 
-    # return JSONResponse(json_data)
+
+# @app.put("/get_meta_data/{item_id}")
+# async def get_meta_data(item_id: int, item: Item):
+#     return {"item_id": item_id, **item.dict()}
