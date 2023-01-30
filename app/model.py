@@ -24,12 +24,11 @@ Base = declarative_base()
 meta = MetaData()
 
 
-# 1. HACCP 인증업체
 class ImgMetaData(Base):
     __tablename__ = "test_bpple_meta" # 여기서 테이블명은 소문자로 만들어야 한다.
 
     seq = Column(Integer, primary_key=True, autoincrement=True)
-    path = Column(String(200), nullable=True)  # 파일경로
+    file = Column(String(200), nullable=True)  # 파일경로
     latitude = Column(String(50), nullable=True)  # 위도
     longitude = Column(String(50), nullable=True)  # 경도        
     manufacturer = Column(String(50), nullable=True)  # 제조사
@@ -43,5 +42,6 @@ class BppleUser(Base):
     id = Column(String(50), nullable=True)  # 아이디
     pw = Column(String(50), nullable=True)  # 패스워드
     farm_name = Column(String(50), nullable=True)  # 농장명
+    
 
     
