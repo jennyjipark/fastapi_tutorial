@@ -5,14 +5,24 @@ from config import get_secret
 
 class engineconn:
 
+    # AWS DB
+    # app = {
+    #     "name": "postgresql",
+    #     "user": get_secret("POSTGRES_ID"),
+    #     "password": get_secret("POSTGRES_PW"),
+    #     "host": "bgood.c25k4phikwpu.ap-northeast-2.rds.amazonaws.com",
+    #     "dbconn": "postgres",
+    #     "port": "5432"
+    # }
+# jdbc:postgresql://localhost:5432/postgres
     app = {
-    "name": "postgresql",
-    "user": get_secret("POSTGRES_ID"),
-    "password": get_secret("POSTGRES_PW"),
-    "host": "bgood.c25k4phikwpu.ap-northeast-2.rds.amazonaws.com",
-    "dbconn": "postgres",
-    "port": "5432"
-}
+        "name": "postgresql",
+        "user": "",
+        "password": "",
+        "host": "localhost",
+        "dbconn": "postgres",
+        "port": "5432"
+    }
     conn_string = f'{app["name"]}://{app["user"]}:{app["password"]}@{app["host"]}:{app["port"]}/{app["dbconn"]}'
 
     def __init__(self):
