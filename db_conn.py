@@ -14,17 +14,17 @@ class engineconn:
     #     "dbconn": "postgres",
     #     "port": "5432"
     # }
+    # jdbc:postgresql://34.64.154.219:5432/postgres
 
     app = {
         "name": "postgresql",
         "user": "",
-        "password": "",
+        "password": "bgood0812!",
         "host": "34.64.154.219",
         "dbconn": "postgres",
         "port": "5432"
     }
-    # conn_string = f'{app["name"]}://{app["user"]}:{app["password"]}@{app["host"]}:{app["port"]}/{app["dbconn"]}'
-    conn_string = f'{app["name"]}://{app["host"]}:{app["port"]}/{app["dbconn"]}'
+    conn_string = f'{app["name"]}://{app["user"]}:{app["password"]}@{app["host"]}:{app["port"]}/{app["dbconn"]}'
 
     def __init__(self):
         self.engine = create_engine(self.conn_string, pool_pre_ping=True)
