@@ -14,12 +14,12 @@ class engineconn:
     #     "dbconn": "postgres",
     #     "port": "5432"
     # }
-# jdbc:postgresql://localhost:5432/postgres
+
     app = {
         "name": "postgresql",
         "user": "",
         "password": "",
-        "host": "localhost",
+        "host": "34.64.154.219",
         "dbconn": "postgres",
         "port": "5432"
     }
