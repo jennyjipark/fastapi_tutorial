@@ -134,8 +134,14 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
     dic = meta.dict() 
     meta = dic["meta"]
     
-    session.bulk_insert_mappings(ImgMetaData, meta)
-    session.commit()
+    try:
+        session.bulk_insert_mappings(ImgMetaData, meta)
+        session.commit()
+    except Exception as e:
+        print("send_meta_data error ", e)
+        session.rollback()
+    finally:
+        session.close()
 
     # session.add
     # print(item.dict())
