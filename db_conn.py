@@ -18,7 +18,7 @@ class engineconn:
 
     app = {
         "name": "postgresql",
-        "user": "",
+        "user": "postgres",
         "password": "bgood0812!",
         "host": "34.64.154.219",
         "dbconn": "postgres",
