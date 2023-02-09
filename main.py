@@ -130,8 +130,8 @@ def user_login(user: UserLoginSchema=Body(default=None)): # 바디에 담아서 
 # @app.post("/send_meta_data/", dependencies=[Depends(jwtBearer())], tags=["send metadata"])
 @app.post("/send_meta_data/", tags=["send metadata"])
 async def send_meta_data(meta: MetaSchema=Body(default=None)):
-    print("원본", meta)
-    dic = meta.dict()
+    print("원본", meta) # 리스트[객체]로 들어온다.
+    dic = meta.dict() 
     meta = dic["meta"]
     
     session.bulk_insert_mappings(ImgMetaData, meta)
