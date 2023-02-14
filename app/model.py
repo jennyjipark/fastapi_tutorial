@@ -30,7 +30,7 @@ class ImgMetaData(Base):
     seq = Column(Integer, primary_key=True, autoincrement=True)
     uplode_time = Column(DateTime, nullable=False) # 업로드 시각
     capture_time = Column(DateTime, nullable=False) # 사진찍은 시각
-    file = Column(String(200), nullable=True)  # 파일경로
+    file_path = Column(String(200), nullable=True)  # 파일경로
     latitude = Column(String(50), nullable=True)  # 위도
     longitude = Column(String(50), nullable=True)  # 경도        
     manufacturer = Column(String(50), nullable=True)  # 제조사
