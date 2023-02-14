@@ -1,10 +1,10 @@
 
-from fastapi import FastAPI, status, Body, Depends, Header, Cookie
+from fastapi import FastAPI, status, Body, Depends, Header, Cookie, UploadFile, File
 from typing import Optional
 # from sqlalchemy.orm import Session
 # from sqlalchemy import MetaData, Table
 from sqlalchemy.orm import declarative_base
-
+from fastapi.responses import FileResponse
 from fastapi import FastAPI, Body, Depends
 from app.schema import UserSchema, MetaSchema
 from app.auth.jwt_handler import signJWT
@@ -17,6 +17,8 @@ from app.model import (
     BppleUser
 )
 from app.schema import *
+import os
+from datetime import *
 
 app = FastAPI()
 app.router.redirect_slashes = False
@@ -36,6 +38,11 @@ users: List[UserSchema] = [
 # metas: List[MetaSchema] = []
 ############################################################
 access_token: bytes
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_DIR = os.path.join(BASE_DIR,'static/')
+IMG_DIR = os.path.join(STATIC_DIR,'images/')
+SERVER_IMG_DIR = os.path.join('http://localhost:8000/','static/','images/')
 
 # 시작
 @app.get("/", tags=["start"], status_code=status.HTTP_201_CREATED)
@@ -149,3 +156,31 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
     return {
         "token": "www"
     }
+
+# 이미지 서버로 보내기 > 토큰 있어야 가능
+@app.post("/send_image/", tags=["send image"])
+async def send_image(in_files: List[UploadFile] = File(...)):
+    print("원본", in_files) 
+    file_urls=[]
+    
+    # 파일을 푼다.
+    for file in in_files:
+        current_time = datetime.now().strftime("%Y%m%d%H%M%S")
+        saved_file_name = f"image_{current_time}"
+        print(saved_file_name)
+
+        file_location = os.path.join(IMG_DIR, saved_file_name)
+
+        # 보낸 파일을 쓴다.
+        with open(file_location, "wb+") as file_object:
+            file_object.write(file.file.read())
+        file_urls.append(SERVER_IMG_DIR + saved_file_name)
+
+    result = {"file_urls" : file_urls}
+    
+    return "file"
+
+# 파일 저장
+@app.get('/images/{file_name}', tags=["get images"])
+def get_image(file_name:str):
+    return FileResponse(''.join([IMG_DIR, file_name]))
