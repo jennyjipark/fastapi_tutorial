@@ -28,9 +28,9 @@ class ImgMetaData(Base):
     __tablename__ = "test_bpple_meta" # 여기서 테이블명은 소문자로 만들어야 한다.
 
     seq = Column(Integer, primary_key=True, autoincrement=True)
+    file_path = Column(String(200), nullable=True)  # 파일경로
     uplode_time = Column(DateTime, nullable=False) # 업로드 시각
     capture_time = Column(DateTime, nullable=False) # 사진찍은 시각
-    file_path = Column(String(200), nullable=True)  # 파일경로
     latitude = Column(String(50), nullable=True)  # 위도
     longitude = Column(String(50), nullable=True)  # 경도        
     manufacturer = Column(String(50), nullable=True)  # 제조사

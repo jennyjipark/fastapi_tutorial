@@ -5,8 +5,8 @@ from datetime import datetime, timezone
 # 메타정보 스키마
 class MetaItemSchema(BaseModel):
     file_path: str = Field(default=None) 
-    upload_time: datetime = Field(default=None) 
-    capture_time: datetime = Field(default=None) 
+    upload_time: str = Field(default=None) 
+    capture_time: str = Field(default=None) 
     file_path: str = Field(default=None) 
     latitude: str = Field(default=None)
     longitude: str = Field(default=None)
