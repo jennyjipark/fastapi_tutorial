@@ -40,9 +40,14 @@ users: List[UserSchema] = [
 access_token: bytes
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_DIR = os.path.join(BASE_DIR,'static/')
-IMG_DIR = os.path.join(STATIC_DIR,'images/')
+STATIC_DIR = os.path.join(BASE_DIR, 'static/')
+IMG_DIR = os.path.join(STATIC_DIR, 'images/')
 SERVER_IMG_DIR = os.path.join('http://localhost:8000/','static/','images/')
+
+if not os.path.exists(STATIC_DIR):
+    os.mkdir(STATIC_DIR)
+if not os.path.exists(IMG_DIR):
+    os.mkdir(IMG_DIR)
 
 # 시작
 @app.get("/", tags=["start"], status_code=status.HTTP_201_CREATED)
