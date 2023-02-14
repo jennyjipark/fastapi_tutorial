@@ -16,11 +16,12 @@ class engineconn:
     # }
     # jdbc:postgresql://34.64.154.219:5432/postgres
 
+    # 재성님 DB
     app = {
         "name": "postgresql",
-        "user": "postgres",
+        "user": "bpple",
         "password": "bgood0812!",
-        "host": "34.64.154.219",
+        "host": "ls-a025b1414cbd4e5d61263bd1a387d03c90b8e379.celvuh7c3m1y.ap-northeast-2.rds.amazonaws.com",
         "dbconn": "postgres",
         "port": "5432"
     }

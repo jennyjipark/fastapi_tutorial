@@ -28,6 +28,8 @@ class ImgMetaData(Base):
     __tablename__ = "test_bpple_meta" # 여기서 테이블명은 소문자로 만들어야 한다.
 
     seq = Column(Integer, primary_key=True, autoincrement=True)
+    uplode_date = Column(DateTime, nullable=False) # 업로드 시간
+    capture_date = Column(DateTime, nullable=False) # 사진찍은 시간
     file = Column(String(200), nullable=True)  # 파일경로
     latitude = Column(String(50), nullable=True)  # 위도
     longitude = Column(String(50), nullable=True)  # 경도        
@@ -39,6 +41,7 @@ class BppleUser(Base):
     __tablename__ = "test_bpple_user"
 
     seq = Column(Integer, primary_key=True, autoincrement=True)
+    register_date = Column(DateTime, nullable=False) # 회원가입 시간
     id = Column(String(50), nullable=True)  # 아이디
     pw = Column(String(50), nullable=True)  # 패스워드
     farm_name = Column(String(50), nullable=True)  # 농장명
