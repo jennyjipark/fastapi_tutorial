@@ -1,9 +1,13 @@
 from pydantic import BaseModel, Field
 from typing import List
+from datetime import datetime, timezone
 
 # 메타정보 스키마
 class MetaItemSchema(BaseModel):
-    file: str = Field(default=None) 
+    file_path: str = Field(default=None) 
+    upload_time: datetime = Field(default=None) 
+    capture_time: datetime = Field(default=None) 
+    file_path: str = Field(default=None) 
     latitude: str = Field(default=None)
     longitude: str = Field(default=None)
     manufacturer: str = Field(default=None)
@@ -13,7 +17,9 @@ class MetaItemSchema(BaseModel):
     class Config:
         the_schema = {
             "user_demo": {
-                "file": "img/img/img...",
+                "file_path": "img/img/img...",
+                "upload_time": "2022-12-01",
+                "capture_time": "2022-12-01",
                 "latitude": "37.1010100",
                 "longitude": "10.0000000",
                 "manufacturer": "samsung",
