@@ -165,14 +165,14 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
 
 # 이미지 서버로 보내기
 @app.post("/send_images/", tags=["send image"])
-async def send_images(files: List[UploadFile] = File(...)):
+async def send_images(file: List[UploadFile] = File(...)):
 # async def send_images(files: UploadFile = File(...)):
-    print("파일들", files) 
+    print("파일들", file) 
     
     file_urls = []
 
     # 파일을 푼다.
-    for file in files:
+    for f in file:
         current_time = datetime.now().strftime("%Y%m%d%H%M%S")
         saved_file_name = f"image_{current_time}"
         print(saved_file_name)
@@ -181,7 +181,7 @@ async def send_images(files: List[UploadFile] = File(...)):
 
         # 보낸 파일을 쓴다.
         with open(file_location, "wb+") as file_object:
-            file_object.write(file.file.read())
+            file_object.write(f.file.read())
         file_urls.append(SERVER_IMG_DIR + saved_file_name)
 
     # result = {"file_urls": "나와라"}
