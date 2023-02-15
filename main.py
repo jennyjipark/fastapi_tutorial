@@ -172,9 +172,10 @@ async def send_images(files: List[UploadFile] = File(...)):
     file_urls = []
 
     # 파일을 푼다.
-    for file in files:
+    for i, file in enumerate(files):
         current_time = datetime.now().strftime("%Y%m%d%H%M%S")
-        saved_file_name = f"image_{current_time}"
+        # saved_file_name = f"image_{i}_{current_time}"
+        saved_file_name = file.filename
         print(saved_file_name)
 
         file_location = os.path.join(IMG_DIR, saved_file_name)
