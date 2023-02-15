@@ -92,7 +92,7 @@ def user_signup(user: UserSchema=Body(default=None), status_code=status.HTTP_201
 
 
 # 회원가입 후 유저정보 DB넣기
-@app.get("/insert_user/", tags=["Insert User"])
+@app.get("/insert_user/", tags=["insert user"])
 async def insert_user():
     for user in users:
         session.bulk_insert_mappings(BppleUser, [user.dict()])
@@ -165,8 +165,8 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
 
 # 이미지 서버로 보내기
 @app.post("/send_images/", tags=["send image"])
-# async def send_images(files: List[UploadFile] = File(...)):
-async def send_images(files: UploadFile = File(...)):
+async def send_images(files: List[UploadFile] = File(...)):
+# async def send_images(files: UploadFile = File(...)):
     print("파일들", files) 
     
     file_urls = []
