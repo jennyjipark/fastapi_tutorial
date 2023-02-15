@@ -166,7 +166,6 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
 # 이미지 서버로 보내기 > 토큰 있어야 가능
 @app.post("/send_images/", tags=["send image"])
 async def send_images(files: List[UploadFile] = File(...)):
-# async def send_image(file: UploadFile = File(...)):
     print("파일들", files) 
     
     file_urls = []
@@ -184,9 +183,9 @@ async def send_images(files: List[UploadFile] = File(...)):
             file_object.write(file.file.read())
         file_urls.append(SERVER_IMG_DIR + saved_file_name)
 
-    result = {"file_urls" : file_urls}
+    result = {"file_urls" : "dddddd"}
     
-    # return "file"
+    return result
 
 # 파일 저장
 @app.get("/images/{file_name}", tags=["get images"])

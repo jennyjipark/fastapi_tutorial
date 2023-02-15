@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import List
 from datetime import datetime, timezone
+from fastapi import UploadFile
 
 # 메타정보 스키마
 class MetaItemSchema(BaseModel):
@@ -30,6 +31,9 @@ class MetaItemSchema(BaseModel):
 
 class MetaSchema(BaseModel):
     meta: List[MetaItemSchema] = Field(default=None)
+
+class FileSchema(BaseModel):
+    files: List[UploadFile] = Field(default=None)
 
 
 # 유저정보 스키마
