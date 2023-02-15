@@ -172,17 +172,17 @@ async def send_images(files: UploadFile):
     file_urls = []
 
     # 파일을 푼다.
-    # for file in files:
-    #     current_time = datetime.now().strftime("%Y%m%d%H%M%S")
-    #     saved_file_name = f"image_{current_time}"
-    #     print(saved_file_name)
+    for file in files:
+        current_time = datetime.now().strftime("%Y%m%d%H%M%S")
+        saved_file_name = f"image_{current_time}"
+        print(saved_file_name)
 
-    #     file_location = os.path.join(IMG_DIR, saved_file_name)
+        file_location = os.path.join(IMG_DIR, saved_file_name)
 
-    #     # 보낸 파일을 쓴다.
-    #     with open(file_location, "wb+") as file_object:
-    #         file_object.write(file.file.read())
-    #     file_urls.append(SERVER_IMG_DIR + saved_file_name)
+        # 보낸 파일을 쓴다.
+        with open(file_location, "wb+") as file_object:
+            file_object.write(file.file.read())
+        file_urls.append(SERVER_IMG_DIR + saved_file_name)
 
     # result = {"file_urls": "나와라"}
     
