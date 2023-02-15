@@ -175,11 +175,11 @@ async def send_images(files: List[UploadFile] = File(...)):
     for i, file in enumerate(files):
         current_time = datetime.now().strftime("%Y%m%d%H%M%S")
         # saved_file_name = f"image_{i}_{current_time}"
-        saved_file_name = file.filename
+        saved_file_name = current_time + "_" + file.filename
         print(saved_file_name)
 
         file_location = os.path.join(IMG_DIR, saved_file_name)
-
+        
         # 보낸 파일을 쓴다.
         with open(file_location, "wb+") as file_object:
             file_object.write(file.file.read())
