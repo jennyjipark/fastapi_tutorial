@@ -167,7 +167,7 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
 @app.post("/send_images/", tags=["send image"])
 async def send_images(files: List[UploadFile] = File(...)):
 # async def send_image(file: UploadFile = File(...)):
-    print("원본", files) 
+    print("파일들", files) 
     
     # file_urls = []
 
@@ -186,7 +186,7 @@ async def send_images(files: List[UploadFile] = File(...)):
 
     # result = {"file_urls" : file_urls}
     
-    # return "file"
+    return "file"
 
 # 파일 저장
 @app.get("/images/{file_name}", tags=["get images"])
