@@ -166,7 +166,7 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
 # 이미지 서버로 보내기
 @app.post("/send_images/", tags=["send image"])
 # async def send_images(files: List[UploadFile] = File(...)):
-async def send_images(files: List[UploadFile] = Form(...)):
+async def send_images(files: UploadFile = File(...)):
     print("파일들", files) 
     
     file_urls = []
