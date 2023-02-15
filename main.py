@@ -139,7 +139,7 @@ def user_login(user: UserLoginSchema=Body(default=None)): # 바디에 담아서 
         }
     
 
-# 이미지 메타데이터 보내기 > 토큰 있어야 가능
+# 이미지 메타데이터 보내기 > 토큰 있어야 가능 > 일단 없어도되게 주석처리
 # @app.post("/send_meta_data/", dependencies=[Depends(jwtBearer())], tags=["send metadata"])
 @app.post("/send_meta_data/", tags=["send metadata"])
 async def send_meta_data(meta: MetaSchema=Body(default=None)):
@@ -163,7 +163,7 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
         "token": "www"
     }
 
-# 이미지 서버로 보내기 > 토큰 있어야 가능
+# 이미지 서버로 보내기
 @app.post("/send_images/", tags=["send image"])
 async def send_images(files: List[UploadFile] = File(...)):
     print("파일들", files) 
@@ -183,9 +183,9 @@ async def send_images(files: List[UploadFile] = File(...)):
             file_object.write(file.file.read())
         file_urls.append(SERVER_IMG_DIR + saved_file_name)
 
-    result = {"file_urls" : "dddddd"}
+    result = {"file_urls": "나와라"}
     
-    return result
+    return {"file_urls": "나와라"}
 
 # 파일 저장
 @app.get("/images/{file_name}", tags=["get images"])

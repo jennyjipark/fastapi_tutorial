@@ -29,9 +29,11 @@ class MetaItemSchema(BaseModel):
             }
         }
 
+# 메타데이터
 class MetaSchema(BaseModel):
     meta: List[MetaItemSchema] = Field(default=None)
 
+# 이미지 파일
 class FileSchema(BaseModel):
     files: List[UploadFile] = Field(default=None)
 
