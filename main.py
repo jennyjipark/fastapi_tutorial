@@ -1,5 +1,5 @@
 
-from fastapi import FastAPI, status, Body, Depends, Header, Cookie, UploadFile, File
+from fastapi import FastAPI, status, Body, Depends, Header, Cookie, UploadFile, File, Form
 from typing import Optional
 # from sqlalchemy.orm import Session
 # from sqlalchemy import MetaData, Table
@@ -166,7 +166,7 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
 # 이미지 서버로 보내기
 @app.post("/send_images/", tags=["send image"])
 # async def send_images(files: List[UploadFile] = File(...)):
-async def send_images(files: List[UploadFile] = File(...)):
+async def send_images(files: List[UploadFile] = Form(...)):
     print("파일들", files) 
     
     file_urls = []
