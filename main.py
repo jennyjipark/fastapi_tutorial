@@ -44,6 +44,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static/')
 IMG_DIR = os.path.join(STATIC_DIR, 'images/')
 SERVER_IMG_DIR = os.path.join('http://localhost:8000/','static/','images/')
 
+# 해당 폴더가 없을 경우 생성한다.
 if not os.path.exists(STATIC_DIR):
     os.mkdir(STATIC_DIR)
 if not os.path.exists(IMG_DIR):
@@ -164,23 +165,24 @@ async def send_meta_data(meta: MetaSchema=Body(default=None)):
 
 # 이미지 서버로 보내기 > 토큰 있어야 가능
 @app.post("/send_image/", tags=["send image"])
-# async def send_image(in_files: List[UploadFile] = File(...)):
-async def send_image(file: UploadFile = File(...)):
-    print("원본", file) 
-    file_urls=[]
+async def send_image(files: List[UploadFile] = File(...)):
+# async def send_image(file: UploadFile = File(...)):
+    print("원본", files) 
+    
+    file_urls = []
     
     # 파일을 푼다.
-    # for file in in_files:
-    current_time = datetime.now().strftime("%Y%m%d%H%M%S")
-    saved_file_name = f"image_{current_time}"
-    print(saved_file_name)
+    for file in files:
+        current_time = datetime.now().strftime("%Y%m%d%H%M%S")
+        saved_file_name = f"image_{current_time}"
+        print(saved_file_name)
 
-    file_location = os.path.join(IMG_DIR, saved_file_name)
+        file_location = os.path.join(IMG_DIR, saved_file_name)
 
-    # 보낸 파일을 쓴다.
-    with open(file_location, "wb+") as file_object:
-        file_object.write(file.file.read())
-    file_urls.append(SERVER_IMG_DIR + saved_file_name)
+        # 보낸 파일을 쓴다.
+        with open(file_location, "wb+") as file_object:
+            file_object.write(file.file.read())
+        file_urls.append(SERVER_IMG_DIR + saved_file_name)
 
     result = {"file_urls" : file_urls}
     
